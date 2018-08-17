@@ -1,0 +1,11 @@
+---
+# Copyright 2016-2017 FUJITSU LIMITED
+
+- name: restart keepalived
+  service: name=keepalived state=restarted
+
+- name: save iptables
+  command: "{{ iptables_save_bin }}"
+
+- name: restart network
+  service: name=network state=restart

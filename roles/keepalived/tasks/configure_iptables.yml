@@ -1,0 +1,25 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+- name: Check if firewalld
+  command: /usr/bin/systemctl status firewalld
+  ignore_errors: yes
+  register: firewalld
+
+- name: Allow multicast connections from all other hosts
+  command: iptables -I INPUT -i {{ keepalived_binding_interface }} -d 224.0.0.0/8 -s {{ keepalived_iptables_network }} -j ACCEPT
+  notify:
+  - save iptables
+  when: firewalld is not defined or firewalld.rc != 0
+
+- name: Allow VRRP connections from all other hosts
+  command: iptables -A INPUT -i {{ keepalived_binding_interface }} -p vrrp -s {{ keepalived_iptables_network }} -j ACCEPT
+  notify:
+  - save iptables
+  when: firewalld is not defined or firewalld.rc != 0
+
+- name: Allow sending VRRP connections
+  command: iptables -A OUTPUT -o {{ keepalived_binding_interface }} -p vrrp -d {{ keepalived_iptables_network }} -j ACCEPT
+  notify:
+  - save iptables
+  when: firewalld is not defined or firewalld.rc != 0

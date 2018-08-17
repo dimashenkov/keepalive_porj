@@ -1,0 +1,5 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+- name: Stop Keepalived
+  service: name=keepalived state=stopped

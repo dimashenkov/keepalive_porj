@@ -1,0 +1,60 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+- name: Turn on IP forwarding
+  sysctl:
+    name="net.ipv4.ip_forward"
+    value=1
+    state=present
+    sysctl_set=yes
+
+- name: Allow binding to nonlocal IP
+  sysctl:
+    name="net.ipv4.ip_nonlocal_bind"
+    value=1
+    state=present
+    sysctl_set=yes
+
+- name: Disable ARP caching for VIP (net.ipv4.conf.all.arp_ignore)
+  sysctl:
+    name="net.ipv4.conf.all.arp_ignore"
+    value="{{ net_ipv4_conf_all_arp_ignore }}"
+    state=present
+    sysctl_set=yes
+
+- name: Disable ARP caching for VIP (net.ipv4.conf.all.arp_announce)
+  sysctl:
+    name="net.ipv4.conf.all.arp_announce"
+    value="{{ net_ipv4_conf_all_arp_announce }}"
+    state=present
+    sysctl_set=yes
+
+- name: Create configuration file for Keepalived
+  template:
+    src=keepalived.conf.j2
+    dest=/etc/keepalived/keepalived.conf
+    owner=root
+    group=root
+    mode=0640
+  notify:
+  - restart keepalived
+
+- name: Set local rsyslog facility to 2
+  replace:
+    dest=/etc/sysconfig/keepalived
+    regexp='KEEPALIVED_OPTIONS="-D"'
+    replace='KEEPALIVED_OPTIONS="-D --log-facility 2"'
+
+- name: Create configuration file for rsyslog
+  template:
+    src=etc_rsyslog.d_00-keepalived.conf.j2
+    dest=/etc/rsyslog.d/00-keepalived.conf
+    owner=root
+    group=root
+    mode=0640
+
+- name: Restart rsyslog
+  service: name=rsyslog state=restarted
+
+- name: Set up iptables
+  include: configure_iptables.yml

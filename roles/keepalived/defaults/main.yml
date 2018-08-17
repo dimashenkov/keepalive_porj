@@ -1,0 +1,41 @@
+---
+# Copyright 2016 FUJITSU LIMITED
+
+# Variables for role keepalived
+
+keepalived_version: 1.3.5
+
+# Required variables, break role if not provided
+keepalived_global_router_id: "node"
+keepalived_binding_interface: "enp0s3"
+keepalived_virtual_ip: "192.168.1.1"
+
+keepalived_auth_pass: "password"
+keepalived_node_role: "BACKUP"
+keepalived_virtual_router_id: "60"
+
+keepalived_iptables_network: "192.168.0.0/24"
+
+# Set them only if specified by user
+# keepalived_node_priority: 0
+# keepalived_nopreempt: false
+# keepalived_script_weight: 2
+#
+# Optional, monitor this interfaces as well.
+# Keepalived will enter FAILED state if any of this go down.
+# keepalived_tracked_interfaces:
+#   - "eth0"
+#   - "eth1"
+
+keepalived_script_check_process: "teleport"
+keepalived_script_interval: 2
+keepalived_script_rise: 5
+
+net_ipv4_conf_all_arp_ignore: 1
+net_ipv4_conf_all_arp_announce: 2
+
+log_dir: "/var/log"
+keepalived_log_file: "{{ log_dir }}/keepalived.log"
+
+# runtime settings
+run_mode: Deploy

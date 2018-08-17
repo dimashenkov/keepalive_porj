@@ -1,0 +1,4 @@
+- hosts: s1
+  roles:
+     - { role: keepalived, keepalived_virtual_ip: "192.168.1.1", keepalived_node_role: "master" }
+
