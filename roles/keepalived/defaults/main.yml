@@ -6,6 +6,8 @@
 keepalived_version: 1.3.5
 
 # Required variables, break role if not provided
+keepalived_instance: "VI_1"
+keepalived_sync_groups: {VG1}
 keepalived_global_router_id: "node"
 keepalived_binding_interface: "enp0s3"
 keepalived_virtual_ip: "192.168.1.1"
@@ -26,6 +28,10 @@ keepalived_iptables_network: "192.168.0.0/24"
 # keepalived_tracked_interfaces:
 #   - "eth0"
 #   - "eth1"
+
+sync_group.notify_master: "/usr/local/bin/Change_VRRP_Status.sh master"
+sync_group.notify_backup: "/usr/local/bin/Change_VRRP_Status.sh backup"
+sync_group.notify_fault: "/usr/local/bin/Change_VRRP_Status.sh fault"
 
 keepalived_script_check_process: "teleport"
 keepalived_script_interval: 2

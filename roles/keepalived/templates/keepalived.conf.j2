@@ -14,6 +14,15 @@ global_defs {
 {% endif %}
 }
 
+{% for name, sync_group in keepalived_sync_groups.items() %}
+vrrp_sync_group {{ name }} {
+        group {
+                {{keepalived_instance}}
+	}
+
+}
+{% endfor %}
+
 vrrp_script chk_service_{{ keepalived_script_check_process | safe | trim }} {           # Requires keepalived-1.1.13
     script "killall -0 {{ keepalived_script_check_process | trim }}"     # cheaper than pidof
     interval {{ keepalived_script_interval }}              # check every specified nr of seconds
@@ -23,7 +32,7 @@ vrrp_script chk_service_{{ keepalived_script_check_process | safe | trim }} {   
 {% endif %}
 }
 
-vrrp_instance VI_1 {
+vrrp_instance {{keepalived_instance}} {
     state {{ keepalived_node_role | upper | default('BACKUP') }}
     interface {{ keepalived_binding_interface }}
     virtual_router_id {{ keepalived_virtual_router_id }}
