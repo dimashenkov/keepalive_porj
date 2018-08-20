@@ -18,6 +18,7 @@ global_defs {
 vrrp_sync_group {{ name }} {
         group {
                 {{keepalived_instance}}
+{{ansible_hostname}}
 	}
         # notify scripts and alerts are optional
         #

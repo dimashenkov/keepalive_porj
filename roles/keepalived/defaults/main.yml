@@ -19,7 +19,7 @@ keepalived_virtual_router_id: "60"
 keepalived_iptables_network: "192.168.0.0/24"
 
 # Set them only if specified by user
-# keepalived_node_priority: 0
+keepalived_node_priority: "100"
 # keepalived_nopreempt: false
 # keepalived_script_weight: 2
 #

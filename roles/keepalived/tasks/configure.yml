@@ -29,6 +29,11 @@
     state=present
     sysctl_set=yes
 
+- name: Register hostname
+  shell: "echo $HOSTNAME | awk -F\\. '{print $(NF-2)\".\"$(NF-1)\".\"$NF}'"
+  register: config_hostname
+- debug: msg="{{config_hostname.stdout}}"
+
 - name: Create configuration file for Keepalived
   template:
     src=keepalived.conf.j2
