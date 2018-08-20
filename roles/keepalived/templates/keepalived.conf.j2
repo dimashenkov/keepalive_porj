@@ -19,7 +19,17 @@ vrrp_sync_group {{ name }} {
         group {
                 {{keepalived_instance}}
 	}
-
+        # notify scripts and alerts are optional
+        #
+        # filenames of scripts to run on transitions
+        # can be unquoted (if just filename)
+        # or quoted (if has parameters)
+        # to MASTER transition
+        notify_master "/usr/local/bin/Change_VRRP_Status.sh master"
+        # to BACKUP transition
+        notify_backup "/usr/local/bin/Change_VRRP_Status.sh backup"
+        # FAULT transition
+        notify_fault "/usr/local/bin/Change_VRRP_Status.sh fault"
 }
 {% endfor %}
 
