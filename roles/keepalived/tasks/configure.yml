@@ -63,3 +63,11 @@
 
 - name: Set up iptables
   include: configure_iptables.yml
+
+- name: Deploy Change_VRRP_Status script
+  copy:
+    src: "{{ role_path }}/files/Change_VRRP_Status.sh"
+    dest: /usr/local/bin/Change_VRRP_Status.sh
+    owner: root
+    group: root
+    mode: '0751'
