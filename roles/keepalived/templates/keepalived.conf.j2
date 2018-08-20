@@ -8,9 +8,10 @@ global_defs {
     notification_email {
         {{ keepalived_global_notification_email | default('cluster-admin@example.org') }}
     }
-    notification_email_from {{ keepalived_global_notification_email_from | default('noreply@example.org') }}
+    notification_email_from {{ keepalived_global_notification_email_from | default('stratsys@ticketmaster.com') }}
     smtp_server {{ keepalived_global_smtp_server | default('smtp.example.org') }}
     smtp_connect_timeout {{ keepalived_global_smtp_connect_timeout | default('30') | int }}
+    lvs_id {{config_hostname.stdout}}
 {% endif %}
 }
 
