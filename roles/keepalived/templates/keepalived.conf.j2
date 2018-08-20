@@ -57,6 +57,9 @@ vrrp_instance {{keepalived_instance}} {
         auth_type PASS
         auth_pass {{ keepalived_auth_pass }}
     }
+    track_interface {
+        dummy0
+    }
     virtual_ipaddress {
         {{ keepalived_virtual_ip }} dev {{ keepalived_binding_interface }} label {{ keepalived_binding_interface }}:0
     }
