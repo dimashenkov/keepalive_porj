@@ -1,5 +1,4 @@
 ---
-# Copyright 2016 FUJITSU LIMITED
 # roles/keepalived/vars/RedHat.yml
 
 iptables_save_bin: /sbin/iptables-save
