@@ -1,5 +1,4 @@
 ---
-# Copyright 2016 FUJITSU LIMITED
 
 - name: Check if firewalld
   command: /usr/bin/systemctl status firewalld
