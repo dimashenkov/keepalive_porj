@@ -1,9 +1,5 @@
 ---
-# Copyright 2016 FUJITSU LIMITED
 
-# Variables for role keepalived
-
-keepalived_version: 1.3.5
 
 # Required variables, break role if not provided
 keepalived_instance: "VI_1"
