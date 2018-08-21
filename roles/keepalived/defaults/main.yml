@@ -25,10 +25,6 @@ keepalived_node_priority: "100"
 #   - "eth0"
 #   - "eth1"
 
-sync_group.notify_master: "/usr/local/bin/Change_VRRP_Status.sh master"
-sync_group.notify_backup: "/usr/local/bin/Change_VRRP_Status.sh backup"
-sync_group.notify_fault: "/usr/local/bin/Change_VRRP_Status.sh fault"
-
 keepalived_script_check_process: "teleport"
 keepalived_script_interval: 2
 keepalived_script_rise: 5
