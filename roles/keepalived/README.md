@@ -1,6 +1,5 @@
 ansible-keepalived: Ansible role for setting up keepalived
 ==========================================================
-Toni Comerma - tcomerma (at) gmail.com
 
 This role sets up keepalived for an standard setup of:
   - One virtual IP
@@ -91,40 +90,6 @@ Example Playbook
          - { role: keepalived, keepalived_virtual_ip: "192.168.1.1", keepalived_node_role: "slave" }
 
 
-Testing & trying
-------------------
-
-Quite simple if you have vagrant installed.
-
-- Pulling from github
-```
-mkdir -p test-keepalived/roles
-cd test-keepalived/roles
-git clone https://github.com/tcomerma/ansible-keepalived.git
-cd ..
-cp roles/ansible-keepalived/test/* .
-mv Vagrantfile.Debian Vagrantfile
-vagrant up
-```
-
-- Pulling from ansible-galaxy
-```
-mkdir -p test-keepalived/roles
-ansible-galaxy install -p test-keepalived/roles tcomerma.keepalived
-cd test-keepalived
-cp roles/tcomerma.keepalived/test/* .
-mv Vagrantfile.Debian Vagrantfile
-
-Edit playbook.yml and change "- ansible-keepalived" for "- tcomerma.keepalived"
-
-vagrant up
-```
 
 
-License
--------
-Apache
 
-Author Information
-------------------
-Toni Comerma - tcomerma (at) gmail.com
