@@ -1,5 +1,4 @@
 ---
-# Copyright 2016 FUJITSU LIMITED
 
 - name: Start Keepalived
   service: name=keepalived state=started enabled=yes
