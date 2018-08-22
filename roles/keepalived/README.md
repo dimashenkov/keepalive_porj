@@ -87,7 +87,7 @@ Example Playbook
 
     - hosts: s2
       roles:
-         - { role: keepalived, keepalived_virtual_ip: "192.168.1.1", keepalived_node_role: "slave" }
+         - { role: keepalived, keepalived_virtual_ip: "192.168.1.1", keepalived_node_role: "backup" }
 
 
 
